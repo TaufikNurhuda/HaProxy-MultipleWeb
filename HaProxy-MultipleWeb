@@ -1,0 +1,26 @@
+#----FrontEnd Script ----#
+
+frontend MAIN
+    bind *:80
+    mode http
+
+acl URL_WEB1 hdr_dom(host) -i yourdomainweb1.com
+acl URL_WEB2 hdr_dom(host) -i yourdomainweb2.id
+
+use backend WEB1 if URL_WEB1
+use backend WEB2 if URL_WEB2
+
+#----END Frontend Script----#
+
+#----Backend Script---#
+backend WEB1
+    mode http
+    option httplog
+    server web1 10.5.x.x(your local ip server)
+
+backend WEB2
+    mode http
+    option httplog
+    server web2 10.10.x.x
+    
+  
